@@ -2,6 +2,8 @@ package ca.cegep.biblio.service;
 
 import ca.cegep.biblio.model.Livre;
 import ca.cegep.biblio.repository.LivreRepository;
+import ca.cegep.biblio.model.Categorie;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,10 +40,10 @@ class LivreServiceTest {
         // Indice : la méthode ne dépend pas du repository.
 
         // Arrange
-        Livre nouveau = new Livre(null, "Dune", "Frank Herbert", "9782266320481", 1965, "ROMAN");
+        int joursRetard = 1000;
 
         // Act
-        double montantFrais = service.calculerFraisRetard("JEUNESSE", 1000);
+        double montantFrais = service.calculerFraisRetard(Categorie.JEUNESSE, joursRetard);
 
         // Assert
         assertTrue(montantFrais <= 5.00);
@@ -57,7 +59,7 @@ class LivreServiceTest {
         // Indice : le repository (mock) doit retourner ce livre pour son id.
 
         // Arrange
-        Livre livre = new Livre(10L, "Prout", "Frank rrrrr", "3938998538", 2000, "ROMAN");
+        Livre livre = new Livre(10L, "Prout", "Frank rrrrr", "3938998538", 2000, Categorie.ROMAN);
         livre.setDisponible(false);
 
         // Act
@@ -79,7 +81,7 @@ class LivreServiceTest {
         // Définissez le comportement du mock avec when(...).thenReturn(...).
         
         // Arrange
-        Livre nouveau = new Livre(10L, "Dune", "Frank Herbert", "9782266320481", 1965, "ROMAN");
+        Livre nouveau = new Livre(10L, "Dune", "Frank Herbert", "9782266320481", 1965, Categorie.ROMAN);
         when(repository.findById(10L)).thenReturn(Optional.of(nouveau));
         
         // Act
