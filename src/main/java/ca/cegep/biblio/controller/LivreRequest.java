@@ -1,6 +1,7 @@
 package ca.cegep.biblio.controller;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import ca.cegep.biblio.model.Categorie;
 
 /** Corps JSON reçu pour créer ou modifier un livre. */
 public record LivreRequest(
@@ -8,5 +9,5 @@ public record LivreRequest(
         @Schema(example = "Victor Hugo") String auteur,
         @Schema(example = "9782253096344") String isbn,
         @Schema(example = "1862") int anneePublication,
-        @Schema(example = "ROMAN", description = "ROMAN, SCIENCE ou JEUNESSE") String categorie) {
+        @Schema(example = "ROMAN", description = "ROMAN, SCIENCE ou JEUNESSE") Categorie categorie) {
 }

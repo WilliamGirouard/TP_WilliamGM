@@ -76,3 +76,8 @@ Ces réponses vont dans votre `README.md` : branche `feature/lecture-code`, puis
         4 : La première fois ça retourne le code 200, soit success(OK), ce qui veut dire que nous avons bel et bien emprunter le livre avec l'id 1. La seconde fois, ça retourne le code 409, soit le code d'erreur d'un conflit, puisque le livre est déjà emprunter.  
         5 : Ça retourne le code d'erreur 200 soit success (OK), ainsi que le montant des frais pour 100 jours de retard, soit 20$.
 
+| # | Code smell  | Fichier | Ligne | Pourquoi c'est un problème | 
+|---|---|---|---|---|
+| 1 | Primitive Obsession |  Livre.java | 11 |  Puisque l'on veut seulement trois valeurs pour la categorie, il est mieux de mettre un Enum et de s'assurer que les seules réponses de catégories possibles soient parmi ces trois choix. | 
+| 2 | Duplicated Code |  LivreService | 28 et 42 |  La validation des données est la même dans la méthode créer et modifier, donc extrait celle-ci en une méthode validation.| 
+| 3 | Repeated Switch/If Chains |  LivreService | 68 |  La méthode pour calculer les frais à pleins de If imbriquées et se répète. On utilise l'enum de catégorie fait plus haut pour y ajouter des paramètres (soit le fraisMaximum de la catégorie et son tarif par jour de retard.). | 
