@@ -92,3 +92,8 @@ Ces réponses vont dans votre `README.md` : branche `feature/lecture-code`, puis
         5- docker ps -a
         6- curl -i http://localhost:8080/api/livres
 
+
+## Choix de nouvelle version
+
+        J'ai choisi de changer la version de 1.0.0 à 1.0.1 donc 
+        (CORRECTIF) selon SemVer. J'ai fait ce choix puisque les 3 code smell que j'ai corrigé ne sont pas des changements majeurs qui changent le contrat de l'api ou qui ajoute des fonctionnalitées. Ça reste de la correction de code, sans changement de contrat.
