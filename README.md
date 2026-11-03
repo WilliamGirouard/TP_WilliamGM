@@ -1,6 +1,6 @@
 # biblio-api
 
-API REST de gestion d'une petite bibliothèque (Spring Boot 3.5, Java 25, architecture MVC).
+API REST de gestion d'une petite bibliothèque (Spring Boot 3.5, Java 21, architecture MVC).
 
 ## Démarrer
 
@@ -81,3 +81,14 @@ Ces réponses vont dans votre `README.md` : branche `feature/lecture-code`, puis
 | 1 | Primitive Obsession |  Livre.java | 11 |  Puisque l'on veut seulement trois valeurs pour la categorie, il est mieux de mettre un Enum et de s'assurer que les seules réponses de catégories possibles soient parmi ces trois choix. | 
 | 2 | Duplicated Code |  LivreService | 28 et 42 |  La validation des données est la même dans la méthode créer et modifier, donc extrait celle-ci en une méthode validation.| 
 | 3 | Repeated Switch/If Chains |  LivreService | 68 |  La méthode pour calculer les frais à pleins de If imbriquées et se répète. On utilise l'enum de catégorie fait plus haut pour y ajouter des paramètres (soit le fraisMaximum de la catégorie et son tarif par jour de retard.). | 
+
+## E.2
+### Commandes utilise 
+        
+        1- chmod +x mvnw
+        2- ./mvnw -B package
+        3- docker build -t biblio-tp3:local .
+        4- docker run -d -p 8080:8080 biblio-tp3:local
+        5- docker ps -a
+        6- curl -i http://localhost:8080/api/livres
+
