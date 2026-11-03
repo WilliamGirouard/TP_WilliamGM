@@ -51,8 +51,28 @@ Parcourez les packages `model`, `repository`, `service`, `controller`, `exceptio
 
 4. Suivez le trajet complet d'un appel `POST /api/livres/1/emprunter` : quelles classes/méthodes sont appelées, dans quel ordre ?
 
-En premier, le controlleur est appelé (classe LivreController)
-Ensuite, c'est le service qui est appelé (classe LivreService, méthode emprunter(long id))
-Après, dans la méthode emprunter, on appel la méthode trouver de LivreService qui elle appelle le repository (LivreRepository) avec la méthode findById pour vérifier si le livre existe.
-Puis, encore dans la méthode emprunter, on appel la classe Livre pour vérifier la disponibilité du livre et la changé s'il est disponible.
-Enfin ça appel la fonction save du repository LivreRepository pour enregistrer le changement de disponibilité du livre.
+        En premier, le controlleur est appelé (classe LivreController)
+        Ensuite, c'est le service qui est appelé (classe LivreService, méthode emprunter(long id))
+        Après, dans la méthode emprunter, on appel la méthode trouver de LivreService qui elle appelle le repository (LivreRepository) avec la méthode findById pour vérifier si le livre existe.
+        Puis, encore dans la méthode emprunter, on appel la classe Livre pour vérifier la disponibilité du livre et la changé s'il est disponible.
+        Enfin ça appel la fonction save du repository LivreRepository pour enregistrer le changement de disponibilité du livre.
+
+
+
+Exécutez ces scénarios et notez le code HTTP obtenu ainsi que le résultat et explique que veut dire ce code:
+| # | Appel | Résultat attendu à vérifier |
+|---|---|---|
+| 1 | `GET /api/livres` | Liste de 3 livres |
+| 2 | `POST /api/livres` avec un nouveau livre | Code 201, id attribué |
+| 3 | `POST /api/livres` avec un titre vide | Code 400 |
+| 4 | `POST /api/livres/1/emprunter` deux fois de suite | 200 puis 409 |
+| 5 | `GET /api/livres/2/frais-retard?joursRetard=100` | Notez le montant : il vous servira pour la partie C |
+
+Ces réponses vont dans votre `README.md` : branche `feature/lecture-code`, puis Pull Request (voir les règles de la partie 0).
+
+        1 : Obtenue une liste de 3 livres et un code HTTP 200. Ce code veut dire Success (OK)
+        2 : Le livre a été créé avec succès (Code 201 - Created), ça retourne l'entité sous format JSON. 
+        3 : Ça retourne une Erreur 400, soit une requête invalide. Dans notre cas, le response body nous avertis qu'il faut obligatoirement avoir un titre. 
+        4 : La première fois ça retourne le code 200, soit success(OK), ce qui veut dire que nous avons bel et bien emprunter le livre avec l'id 1. La seconde fois, ça retourne le code 409, soit le code d'erreur d'un conflit, puisque le livre est déjà emprunter.  
+        5 : Ça retourne le code d'erreur 200 soit success (OK), ainsi que le montant des frais pour 100 jours de retard, soit 20$.
+
