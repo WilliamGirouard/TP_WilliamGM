@@ -13,6 +13,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * TP partie C : à vous d'implémenter les 3 tests ci-dessous.
@@ -56,34 +57,36 @@ class LivreServiceTest {
         // Indice : le repository (mock) doit retourner ce livre pour son id.
 
         // Arrange
-        Livre livre = service.creer("Prout", "Frank rrrrr", "3938998538", 2000, "ROMAN");
+        Livre livre = new Livre(10L, "Prout", "Frank rrrrr", "3938998538", 2000, "ROMAN");
         livre.setDisponible(false);
 
-        // Act && Assert
+        // Act
+        when(repository.findById(10L)).thenReturn(Optional.of(livre));
+
+        // Assert
         IllegalStateException exception = assertThrows(
                 IllegalStateException.class,
-                () -> service.emprunter(livre.getId()));
+                () -> service.emprunter(10L));
         assertNotNull(exception.getMessage());
     }
 
     // ---------- 1 test avec mock (when / thenReturn / verify) ----------
 
     @Test
-    @Disabled("Je n'y arrive pas !")
     void emprunter_livreDisponible_marqueIndisponibleEtSauvegarde() {
         // À tester : emprunter un livre disponible le rend indisponible
         // et appelle repository.save(...) exactement une fois.
         // Définissez le comportement du mock avec when(...).thenReturn(...).
-
+        
         // Arrange
-        // LivreService livreService = new LivreService(repository);
-        // long id = 1;
-        // Livre nouveau = new Livre(id, "Dune", "Frank Herbert", "9782266320481", 1965,
-        // "ROMAN");
-        // repository.save(nouveau);
-
-        // when(livreService.emprunter(id)).thenReturn(nouveau.isDisponible());
-        // verify(repository).save();
+        Livre nouveau = new Livre(10L, "Dune", "Frank Herbert", "9782266320481", 1965, "ROMAN");
+        when(repository.findById(10L)).thenReturn(Optional.of(nouveau));
+        
+        // Act
+        service.emprunter(10L);
+        
+        // Assert
+        verify(repository).save(nouveau);
 
     }
 }
