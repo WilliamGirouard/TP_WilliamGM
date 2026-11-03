@@ -1,6 +1,6 @@
 # biblio-api
 
-API REST de gestion d'une petite bibliothèque (Spring Boot 3.5, Java 25, architecture MVC).
+API REST de gestion d'une petite bibliothèque (Spring Boot 3.5, Java 21, architecture MVC).
 
 ## Démarrer
 
