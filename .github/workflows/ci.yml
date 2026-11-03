@@ -1,9 +1,9 @@
 name: CI
 on:
   push:
-    branches: [ main ]
+    branches: [ main, master ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, master ]
 
 jobs:
   build-and-test:
@@ -23,7 +23,7 @@ jobs:
 
       - name: Fournir access au runner
         run: chmod +x mvnw
-        
+
       - name: Compilation du projet Maven
         run: ./mvnw compile
 
